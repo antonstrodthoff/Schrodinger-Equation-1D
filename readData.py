@@ -27,33 +27,39 @@ for string in data:
         specifications.append(float(string))
     except ValueError:
         continue
-    
+
 def mass():
     return specifications[0]
 
-def xMin():
+def xMinimum():
     return specifications[1]
 
-def xMax():
+def xMaximum():
     return specifications[2]
 
 def nPoint():
-    return specifications[3]
+    return int(specifications[3])
 
-def firstEigenVal():
-    return specifications[4]
+def firstEigenValue():
+    return int(specifications[4])
 
-def lastEigenVal():
-    return specifications[5]
+def lastEigenValue():
+    return int(specifications[5])
 
 def interpolationType():
     return specifications[6]
 
-def interPoints():
+def interpolationPoints():
     return specifications[7]
 
-def xPot():
-    return np.array(specifications[8:len(specifications):2])
+def xPotential():
+    xPot = np.array(specifications[8:len(specifications):2])
+    lastx = -100
+    for (index, x) in enumerate(xPot):
+        if x == lastx:
+            xPot[index]+=0.0000001
+        lastx = x
+    return xPot
     
-def yPot():
+def yPotential():
     return np.array(specifications[9:len(specifications):2])
