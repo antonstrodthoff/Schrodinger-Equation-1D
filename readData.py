@@ -8,25 +8,26 @@ Created on Tue Aug 14 12:27:16 2018
 
 import numpy as np
 
-with open("schrodinger.inp", "r") as dataFile:
-    data = dataFile.read()
-    
-data = data.replace("\n", " ")
-data = data.split(" ")
-
 specifications = []
 
-for string in data:
+def read():
+    global specifications
+    with open("schrodinger.inp", "r") as dataFile:
+        data = dataFile.read()
     
-    if string == "linear" or string == "polynomial":
-        specifications.append(string)
-    elif string == "cspline":
-        specifications.append("cubic")
-        
-    try:
-        specifications.append(float(string))
-    except ValueError:
-        continue
+    data = data.replace("\n", " ")
+    data = data.split(" ")
+
+    for string in data:
+        if string == "linear" or string == "polynomial":
+            specifications.append(string)
+        elif string == "cspline":
+            specifications.append("cubic")
+            
+        try:
+            specifications.append(float(string))
+        except ValueError:
+            continue
 
 def mass():
     return specifications[0]

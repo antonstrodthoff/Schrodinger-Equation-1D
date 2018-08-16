@@ -12,6 +12,7 @@ from scipy.interpolate import interp1d, KroghInterpolator
 from scipy.linalg import eigh_tridiagonal
 import matplotlib.pyplot as plt
 
+rd.read()
 m = rd.mass()
 xMin = rd.xMinimum()
 xMax = rd.xMaximum()
@@ -78,10 +79,7 @@ def saveResults():
     rd.saveXYFormat("energies.dat", energies, ["" for _ in energies])
     rd.saveXYFormat("expvalues.dat", expectedX, uncertainties)
 
-interpolate()
-calculateResults()
-saveResults()
-
-plt.plot(xAxis, normEigenVecs[3])
-plt.plot(xAxis, yPotInter(xAxis)/10)
-plt.show()
+def plot(num):
+    plt.plot(xAxis, normEigenVecs[num])
+    plt.plot(xAxis, yPotInter(xAxis)/10)
+    plt.show()
