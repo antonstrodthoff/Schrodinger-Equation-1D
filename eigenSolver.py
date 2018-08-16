@@ -25,6 +25,11 @@ yPot = rd.yPotential()
 delta = (xMax-xMin)/n
 a = 1/(m*delta**2)
 xAxis = np.linspace(xMin, xMax, n)
+yPotInter = []
+energies = np.array([])
+normEigenVecs = np.array([])
+expectedX = np.array([])
+uncertainties = np.array([])
 
 def norm(vector):
     s = 0
@@ -38,20 +43,45 @@ def normalize(vector):
         vector[index] /= factor
     return vector
 
-if interType == "polynomial":
-    yPotInter = KroghInterpolator(xPot, yPot)
-else:
-    yPotInter = interp1d(xPot, yPot, kind=interType)
+def expX(vector):
+    s = 0
+    for (index, element) in enumerate(vector):
+        s += xAxis[index]*element**2
+    return delta*s
 
-rd.saveXYFormat("potential.dat", xAxis, yPotInter(xAxis))
+def expXSqrd(vector):
+    s = 0
+    for (index, element) in enumerate(vector):
+        s += xAxis[index]**2*element**2
+    return delta*s
 
-(eigenVals, eigenVecs) = eigh_tridiagonal(yPotInter(xAxis)+a, np.full(n-1,-1/2*a), select="i", select_range=(fval,lval))
+def uncertainty(vector):
+    return (expXSqrd(vector)-expX(vector)**2)**(1/2)
 
-normEigenVecs = np.array([normalize(eigenVec) for eigenVec in eigenVecs.T])
+def interpolate():
+    global yPotInter
+    if interType == "polynomial":
+        yPotInter = KroghInterpolator(xPot, yPot)
+    else:
+        yPotInter = interp1d(xPot, yPot, kind=interType)
+    
+def calculateResults():
+    global expectedX, uncertainties, energies, normEigenVecs
+    (energies, eigenVecs) = eigh_tridiagonal(yPotInter(xAxis)+a, np.full(n-1,-1/2*a), select="i", select_range=(fval-1,lval-1))
+    normEigenVecs = np.array([normalize(eigenVec) for eigenVec in eigenVecs.T])
+    expectedX = np.array([expX(eigenVec) for eigenVec in normEigenVecs])
+    uncertainties = np.array([uncertainty(eigenVec) for eigenVec in normEigenVecs])
 
-rd.saveNXYFormat("wavefuncs.dat", xAxis, normEigenVecs.T)
-rd.saveXYFormat("energies.dat", eigenVals, ["" for _ in eigenVals])
+def saveResults():
+    rd.saveXYFormat("potential.dat", xAxis, yPotInter(xAxis))
+    rd.saveNXYFormat("wavefuncs.dat", xAxis, normEigenVecs.T)
+    rd.saveXYFormat("energies.dat", energies, ["" for _ in energies])
+    rd.saveXYFormat("expvalues.dat", expectedX, uncertainties)
 
-plt.plot(xAxis, eigenVecs[:, 2])
-plt.plot(xAxis, yPotInter(xAxis)/100)
+interpolate()
+calculateResults()
+saveResults()
+
+plt.plot(xAxis, normEigenVecs[3])
+plt.plot(xAxis, yPotInter(xAxis)/10)
 plt.show()
