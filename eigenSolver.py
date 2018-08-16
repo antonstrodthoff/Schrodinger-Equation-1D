@@ -31,16 +31,7 @@ if interType == "polynomial":
 else:
     yPotInter = interp1d(xPot, yPot, kind=interType)
 
-yPotInterString = ""
-
-for (index, poty) in enumerate(yPotInter(xAxis)):
-    yPotInterString += str(xAxis[index])
-    yPotInterString += " "
-    yPotInterString += str(poty)
-    yPotInterString += "\n"
-
-with open("potential.dat", "w") as pot:
-    pot.write(yPotInterString)
+rd.saveXYFormat("potential.dat", xAxis, yPotInter(xAxis))
 
 (eigenVals, eigenVecs) = eigh_tridiagonal(yPotInter(xAxis)+a, np.full(n-1,-1/2*a), select="i", select_range=(fval,lval))
 

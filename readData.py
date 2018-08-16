@@ -63,3 +63,26 @@ def xPotential():
     
 def yPotential():
     return np.array(specifications[9:len(specifications):2])
+
+def readXYFormat(fileName):
+    dataList = []
+    with open(fileName, "r") as dataFile:
+        data = dataFile.read()
+        data = data.split("\n")
+        for element in data:
+            dataList.append(element.split(" "))
+    return np.array(dataList).T
+
+def saveXYFormat(filename, x, y):
+    dataString = ""
+    for (index, element) in enumerate(x):
+        if index != 0:
+            dataString += "\n"
+        dataString += str(element)
+        dataString += " "
+        dataString += str(y[index])
+    
+    with open(filename, "w") as file:
+        file.write(dataString)
+    
+    
