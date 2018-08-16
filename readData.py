@@ -64,6 +64,7 @@ def xPotential():
 def yPotential():
     return np.array(specifications[9:len(specifications):2])
 
+"reading XY and NXY formats"
 def readXYFormat(fileName):
     dataList = []
     with open(fileName, "r") as dataFile:
@@ -79,8 +80,22 @@ def saveXYFormat(filename, x, y):
         if index != 0:
             dataString += "\n"
         dataString += str(element)
-        dataString += " "
+        if str(y[index]) != "":
+            dataString += " "
         dataString += str(y[index])
+    
+    with open(filename, "w") as file:
+        file.write(dataString)
+      
+def saveNXYFormat(filename, x, y):
+    dataString = ""
+    for (index, element) in enumerate(x):
+        if index != 0:
+            dataString += "\n"
+        dataString += str(element)
+        if str(y[index]) != "":
+            dataString += " "
+        dataString += " ".join(map(str, y[index]))
     
     with open(filename, "w") as file:
         file.write(dataString)
