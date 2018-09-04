@@ -8,98 +8,93 @@ Created on Tue Aug 14 12:27:16 2018
 
 import numpy as np
 
-class Datareader:
+SPECIFICATIONS = []
+
+def load_data(file):
     """
     Docstring
     """
+    with open(file, "r") as datafile:
+        data = datafile.read()
 
-    specifications = []
+    data = data.replace("\n", " ")
+    data = data.split(" ")
 
-    def __init__(self):
-        """
-        Docstring
-        """
-        with open("schrodinger.inp", "r") as datafile:
-            data = datafile.read()
+    for string in data:
+        if string == "linear" or string == "polynomial":
+            SPECIFICATIONS.append(string)
+        elif string == "cspline":
+            SPECIFICATIONS.append("cubic")
+        try:
+            SPECIFICATIONS.append(float(string))
+        except ValueError:
+            continue
 
-        data = data.replace("\n", " ")
-        data = data.split(" ")
+def particle_mass():
+    """
+    Docstring
+    """
+    return SPECIFICATIONS[0]
 
-        for string in data:
-            if string == "linear" or string == "polynomial":
-                self.specifications.append(string)
-            elif string == "cspline":
-                self.specifications.append("cubic")
-            try:
-                self.specifications.append(float(string))
-            except ValueError:
-                continue
+def x_minimum():
+    """
+    Docstring
+    """
+    return SPECIFICATIONS[1]
 
-    def particle_mass(self):
-        """
-        Docstring
-        """
-        return self.specifications[0]
+def x_maximum():
+    """
+    Docstring
+    """
+    return SPECIFICATIONS[2]
 
-    def x_minimum(self):
-        """
-        Docstring
-        """
-        return self.specifications[1]
+def n_point():
+    """
+    Docstring
+    """
+    return int(SPECIFICATIONS[3])
 
-    def x_maximum(self):
-        """
-        Docstring
-        """
-        return self.specifications[2]
+def first_eigenvalue():
+    """
+    Docstring
+    """
+    return int(SPECIFICATIONS[4])
 
-    def n_point(self):
-        """
-        Docstring
-        """
-        return int(self.specifications[3])
+def last_eigenvalue():
+    """
+    Docstring
+    """
+    return int(SPECIFICATIONS[5])
 
-    def first_eigenvalue(self):
-        """
-        Docstring
-        """
-        return int(self.specifications[4])
+def interpolation_type():
+    """
+    Docstring
+    """
+    return SPECIFICATIONS[6]
 
-    def last_eigenvalue(self):
-        """
-        Docstring
-        """
-        return int(self.specifications[5])
+def interpolation_points():
+    """
+    Docstring
+    """
+    return SPECIFICATIONS[7]
 
-    def interpolation_type(self):
-        """
-        Docstring
-        """
-        return self.specifications[6]
+def x_potential():
+    """
+    Docstring
+    """
+    x_pot = np.array(SPECIFICATIONS[8:len(SPECIFICATIONS):2])
+    last_x = -100
+    for (index, xx) in enumerate(x_pot):
+        if xx == last_x:
+            x_pot[index] += 0.0000001
+        last_x = xx
+    return x_pot
 
-    def interpolation_points(self):
-        """
-        Docstring
-        """
-        return self.specifications[7]
-
-    def x_potential(self):
-        """
-        Docstring
-        """
-        x_pot = np.array(self.specifications[8:len(self.specifications):2])
-        last_x = -100
-        for (index, xx) in enumerate(x_pot):
-            if xx == last_x:
-                x_pot[index] += 0.0000001
-            last_x = xx
-        return x_pot
-
-    def y_potential(self):
-        """
-        Docstring
-        """
-        return np.array(self.specifications[9:len(self.specifications):2])
+def y_potential():
+    """
+    Docstring
+    """
+    return np.array(SPECIFICATIONS[9:len(SPECIFICATIONS):2])
 
 def read_xyformat(filename):
     """
