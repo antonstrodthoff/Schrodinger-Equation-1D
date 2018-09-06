@@ -110,7 +110,7 @@ def read_xyformat(filename):
         data = datafile.read()
         data = data.split("\n")
         for element in data:
-            datalist.append(element.split(" "))
+            datalist.append(list(map(float, element.split(" "))))
     return np.array(datalist).T
 
 def save_xyformat(filename, xx, yy):
