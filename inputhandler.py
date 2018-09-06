@@ -7,7 +7,7 @@ Created on Thu Sep  6 22:11:17 2018
 """
 def input_settings():
     """
-    Docstring
+    Takes input of the user regarding the settings
     """
     inputpath = "schrodinger.inp"
     outputpath = "."

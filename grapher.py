@@ -11,7 +11,7 @@ import readdata as rd
 
 def plot(scalingfactor, changerange, axisrange):
     """
-    Docstring
+    reads the saved files and plots the information
     """
     colorcycle = ["b", "g", "r", "c", "m", "y", "k"]
     activecolor = "b"

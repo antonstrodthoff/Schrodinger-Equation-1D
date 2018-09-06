@@ -12,7 +12,7 @@ SPECIFICATIONS = []
 
 def load_data(inputpath):
     """
-    Docstring
+    loads the data from the input file
     """
     with open(inputpath, "r") as datafile:
         data = datafile.read()
@@ -33,73 +33,69 @@ def load_data(inputpath):
 
 def particle_mass():
     """
-    Docstring
+    returns the mass of the particle
     """
     return SPECIFICATIONS[0]
 
 def x_minimum():
     """
-    Docstring
+    returns the lower bound of the interval, the SE has to be solved in
     """
     return SPECIFICATIONS[1]
 
 def x_maximum():
     """
-    Docstring
+    returns the upper bound of the interval, the SE has to be solved in
     """
     return SPECIFICATIONS[2]
 
 def n_point():
     """
-    Docstring
+    returns the number of interpolation points of the potential
     """
     return int(SPECIFICATIONS[3])
 
 def first_eigenvalue():
     """
-    Docstring
+    returns the index of the first eigenvalue to be calculated
     """
     return int(SPECIFICATIONS[4])
 
 def last_eigenvalue():
     """
-    Docstring
+    returns the index of the last eigenvalue to be calculated
     """
     return int(SPECIFICATIONS[5])
 
 def interpolation_type():
     """
-    Docstring
+    returns the interpolation type of the potential
     """
     return SPECIFICATIONS[6]
 
 def interpolation_points():
     """
-    Docstring
+    returns the number of interpolation points specified by the user
     """
     return SPECIFICATIONS[7]
 
 def x_potential():
     """
-    Docstring
+    returns an array of the x values of the potential given by the user
     """
     x_pot = np.array(SPECIFICATIONS[8:len(SPECIFICATIONS):2])
-    #last_x = None
-    #for (index, xx) in enumerate(x_pot):
-    #    if xx == last_x:
-    #        x_pot[index] += 0.0000001
-    #    last_x = xx
     return x_pot
 
 def y_potential():
     """
-    Docstring
+    returns an array of the y values of the potential given by the user
     """
     return np.array(SPECIFICATIONS[9:len(SPECIFICATIONS):2])
 
 def read_xyformat(filename):
     """
-    Docstring
+    can be used to read information from files in the X-Y-format and N-X-Y-format
+    returns an array of the information
     """
     datalist = []
     with open(filename, "r") as datafile:
@@ -111,7 +107,7 @@ def read_xyformat(filename):
 
 def save_xyformat(filename, xx, yy):
     """
-    Docstring
+    can be used to save an array of format 2xN into a file of X-Y-format
     """
     datastring = ""
     for (index, element) in enumerate(xx):
@@ -127,7 +123,7 @@ def save_xyformat(filename, xx, yy):
 
 def save_nxyformat(filename, xx, yy):
     """
-    Docstring
+    can be used to save an array of format NxM into a file of N-X-Y-format
     """
     datastring = ""
     for (index, element) in enumerate(xx):
