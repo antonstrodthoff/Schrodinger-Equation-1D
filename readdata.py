@@ -13,6 +13,9 @@ SPECIFICATIONS = []
 def load_data(inputpath):
     """
     loads the data from the input file
+
+    :type inputpath: string
+    :param inputpath: path of the schrodinger.inp file containing the input information
     """
     with open(inputpath, "r") as datafile:
         data = datafile.read()
@@ -20,6 +23,9 @@ def load_data(inputpath):
     data = data.replace("\n", " ")
     data = data.split(" ")
 
+    #extracts the information by splitting the string of the input file.
+    #while this method is very simple the user has to be careful how to enter the information
+    #   to the input file in order to not break the program
     for string in data:
         if string == "linear" or string == "polynomial":
             SPECIFICATIONS.append(string)
@@ -96,6 +102,9 @@ def read_xyformat(filename):
     """
     can be used to read information from files in the X-Y-format and N-X-Y-format
     returns an array of the information
+
+    :type filename: string
+    :param filename: name of the file to be read
     """
     datalist = []
     with open(filename, "r") as datafile:
@@ -108,6 +117,15 @@ def read_xyformat(filename):
 def save_xyformat(filename, xx, yy):
     """
     can be used to save an array of format 2xN into a file of X-Y-format
+
+    :type filename: string
+    :param filename: name of the file to be saved
+
+    :type xx: nparray
+    :param xx: the x values to be stored
+
+    :type yy: nparray
+    :param yy: the y values to be stored
     """
     datastring = ""
     for (index, element) in enumerate(xx):
@@ -124,6 +142,15 @@ def save_xyformat(filename, xx, yy):
 def save_nxyformat(filename, xx, yy):
     """
     can be used to save an array of format NxM into a file of N-X-Y-format
+
+    :type filename: string
+    :param filename: name of the file to be saved
+
+    :type xx: nparray
+    :param xx: the x values to be stored
+
+    :type yy: nparray
+    :param yy: multiple columns of y values to be stored
     """
     datastring = ""
     for (index, element) in enumerate(xx):
