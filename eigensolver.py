@@ -99,8 +99,3 @@ def calculate_and_save_results():
     rd.save_nxyformat("wavefuncs.dat", X_AXIS, norm_eigenvecs.T)
     rd.save_xyformat("energies.dat", energies, ["" for _ in energies])
     rd.save_xyformat("expvalues.dat", expected_x, uncertainties)
-
-    #plotting
-    plt.plot(X_AXIS, y_pot_inter(X_AXIS))
-    plt.plot(X_AXIS, norm_eigenvecs[3])
-    plt.show()
