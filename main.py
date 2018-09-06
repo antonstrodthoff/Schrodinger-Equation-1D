@@ -9,5 +9,7 @@ Created on Thu Aug 16 15:05:31 2018
 import eigensolver as es
 import grapher as gr
 
-es.calculate_and_save_results()
+inputpath = input("Please enter path of input file:\n")
+outputpath = input("Where do you want to save the results?\n")
+es.calculate_and_save_results(inputpath, outputpath, save=True, plot=True)
 gr.plot()

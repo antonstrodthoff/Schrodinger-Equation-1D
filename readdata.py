@@ -10,11 +10,11 @@ import numpy as np
 
 SPECIFICATIONS = []
 
-def load_data(file):
+def load_data(inputpath):
     """
     Docstring
     """
-    with open(file, "r") as datafile:
+    with open(inputpath, "r") as datafile:
         data = datafile.read()
 
     data = data.replace("\n", " ")
@@ -29,6 +29,7 @@ def load_data(file):
             SPECIFICATIONS.append(float(string))
         except ValueError:
             continue
+    return SPECIFICATIONS
 
 def particle_mass():
     """
@@ -83,11 +84,11 @@ def x_potential():
     Docstring
     """
     x_pot = np.array(SPECIFICATIONS[8:len(SPECIFICATIONS):2])
-    last_x = -100
-    for (index, xx) in enumerate(x_pot):
-        if xx == last_x:
-            x_pot[index] += 0.0000001
-        last_x = xx
+    #last_x = None
+    #for (index, xx) in enumerate(x_pot):
+    #    if xx == last_x:
+    #        x_pot[index] += 0.0000001
+    #    last_x = xx
     return x_pot
 
 def y_potential():

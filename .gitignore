@@ -1,6 +1,7 @@
+**/__pycache__
 energies.dat
 expvalues.dat
-wavefuncs.dat
 potential.dat
 schrodinger.inp
-__pychache__
+wavefuncs.dat
+.cache
