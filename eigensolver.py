@@ -6,11 +6,10 @@ Created on Tue Aug 14 14:41:54 2018
 @author: Anton
 """
 
-import readdata as rd
 import numpy as np
 from scipy.interpolate import interp1d, KroghInterpolator
 from scipy.linalg import eigh_tridiagonal
-import matplotlib.pyplot as plt
+import readdata as rd
 
 def norm(vector, delta):
     """
@@ -54,7 +53,7 @@ def uncertainty(vector, delta, x_axis):
     """
     return (exp_x_sqrd(vector, delta, x_axis)-exp_x(vector, delta, x_axis)**2)**(1/2)
 
-def calculate_and_save_results(inputpath, outputpath, save=True, plot=True):
+def calculate_and_save_results(inputpath, outputpath):
     """
     Docstring
     """
@@ -94,9 +93,7 @@ def calculate_and_save_results(inputpath, outputpath, save=True, plot=True):
     uncertaintylist = [uncertainty(eigenvec, delta, x_axis) for eigenvec in norm_eigenvecs]
     uncertainties = np.array(uncertaintylist)
 
-    #saving
-    if save:
-        rd.save_xyformat(outputpath + "/potential.dat", x_axis, y_pot_inter(x_axis))
-        rd.save_nxyformat(outputpath + "/wavefuncs.dat", x_axis, norm_eigenvecs.T)
-        rd.save_xyformat(outputpath + "/energies.dat", energies, ["" for _ in energies])
-        rd.save_xyformat(outputpath + "/expvalues.dat", expected_x, uncertainties)
+    rd.save_xyformat(outputpath + "/potential.dat", x_axis, y_pot_inter(x_axis))
+    rd.save_nxyformat(outputpath + "/wavefuncs.dat", x_axis, norm_eigenvecs.T)
+    rd.save_xyformat(outputpath + "/energies.dat", energies, ["" for _ in energies])
+    rd.save_xyformat(outputpath + "/expvalues.dat", expected_x, uncertainties)
