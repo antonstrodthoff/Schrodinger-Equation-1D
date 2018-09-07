@@ -37,6 +37,9 @@ The left one contains the interpolated potential, the eigenstates (shifted on th
 and the expected values of the location of the particle. The right diagram contains the uncertainty in postition
 of the particle.
 
+The files test_potential*.py in the main directory are only for testing. The necessary reference data is
+loaded from the folders test_potentials/test_results*_reference/.
+
 Code
 ^^^^
 .. toctree::

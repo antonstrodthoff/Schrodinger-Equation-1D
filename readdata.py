@@ -25,6 +25,8 @@ def load_data(inputpath):
     data = data.replace("\t", " ")
     data = data.split(" ")
 
+    SPECIFICATIONS.clear()
+
     for string in data:
         if string == "linear" or string == "polynomial":
             SPECIFICATIONS.append(string)
@@ -47,7 +49,7 @@ def particle_mass():
 def x_minimum():
     """
     returns the lower bound of the interval, the SE has to be solved in
-    
+
     :rtype: float
     :returns: lower bound of interval
     """
