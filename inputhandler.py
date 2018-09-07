@@ -8,6 +8,9 @@ Created on Thu Sep  6 22:11:17 2018
 def input_settings():
     """
     Takes input of the user regarding the settings
+
+    :rtype: (string, string, float, boolean, [float])
+    :returns: the settings specified by the user
     """
     inputpath = "schrodinger.inp"
     outputpath = "."

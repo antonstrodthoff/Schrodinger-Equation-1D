@@ -20,12 +20,11 @@ def load_data(inputpath):
     with open(inputpath, "r") as datafile:
         data = datafile.read()
 
+    #extracts the information by splitting the string of the input file.
     data = data.replace("\n", " ")
+    data = data.replace("\t", " ")
     data = data.split(" ")
 
-    #extracts the information by splitting the string of the input file.
-    #while this method is very simple the user has to be careful how to enter the information
-    #   to the input file in order to not break the program
     for string in data:
         if string == "linear" or string == "polynomial":
             SPECIFICATIONS.append(string)
@@ -35,59 +34,85 @@ def load_data(inputpath):
             SPECIFICATIONS.append(float(string))
         except ValueError:
             continue
-    return SPECIFICATIONS
 
 def particle_mass():
     """
     returns the mass of the particle
+
+    :rtype: float
+    :returns: mass of the particle
     """
     return SPECIFICATIONS[0]
 
 def x_minimum():
     """
     returns the lower bound of the interval, the SE has to be solved in
+    
+    :rtype: float
+    :returns: lower bound of interval
     """
     return SPECIFICATIONS[1]
 
 def x_maximum():
     """
     returns the upper bound of the interval, the SE has to be solved in
+
+    :rtype: float
+    :returns: upper bound of interval
     """
     return SPECIFICATIONS[2]
 
 def n_point():
     """
     returns the number of interpolation points of the potential
+
+    :rtype: float
+    :returns: number of interpolation points
     """
     return int(SPECIFICATIONS[3])
 
 def first_eigenvalue():
     """
     returns the index of the first eigenvalue to be calculated
+
+    :rtype: float
+    :returns: first eigenvalue to be calculated
     """
     return int(SPECIFICATIONS[4])
 
 def last_eigenvalue():
     """
     returns the index of the last eigenvalue to be calculated
+
+    :rtype: float
+    :returns: last eigenvalue to be calculated
     """
     return int(SPECIFICATIONS[5])
 
 def interpolation_type():
     """
     returns the interpolation type of the potential
+
+    :rtype: string
+    :returns: interpolation type (linear, cubic or polynomial)
     """
     return SPECIFICATIONS[6]
 
 def interpolation_points():
     """
     returns the number of interpolation points specified by the user
+
+    :rtype: float
+    :returns: number of interpolation points
     """
     return SPECIFICATIONS[7]
 
 def x_potential():
     """
     returns an array of the x values of the potential given by the user
+
+    :rtype: float
+    :returns: the x values of the user specified potential
     """
     x_pot = np.array(SPECIFICATIONS[8:len(SPECIFICATIONS):2])
     return x_pot
@@ -95,6 +120,9 @@ def x_potential():
 def y_potential():
     """
     returns an array of the y values of the potential given by the user
+
+    :rtype: float
+    :returns: the y values of the user specified potential
     """
     return np.array(SPECIFICATIONS[9:len(SPECIFICATIONS):2])
 
@@ -105,6 +133,9 @@ def read_xyformat(filename):
 
     :type filename: string
     :param filename: name of the file to be read
+
+    :rtype: nparray
+    :returns: a 2xN array containing the information
     """
     datalist = []
     with open(filename, "r") as datafile:

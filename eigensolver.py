@@ -13,13 +13,16 @@ import readdata as rd
 
 def norm(vector, delta):
     """
-    returns the norm of a vector
+    calculates the norm of a vector
 
     :type vector: nparray
     :param vector: vector to calculate the norm of
 
     :type delta: float
     :param delta: spacing of the vector entries on the x-axis
+
+    :rtype: float
+    :returns: the norm of the vector
     """
     ss = 0
     for element in vector:
@@ -28,13 +31,16 @@ def norm(vector, delta):
 
 def normalize(vector, delta):
     """
-    returns a normalized version of a vector
+    normalizes a vector
 
     :type vector: nparray
     :param vector: vector to be normalized
 
     :type delta: float
     :param delta: spacing of the vector entries on the x-axis
+
+    :rtype: nparray
+    :returns: a normalized version of the vector
     """
     factor = norm(vector, delta)
     for (index, _) in enumerate(vector):
@@ -43,7 +49,7 @@ def normalize(vector, delta):
 
 def exp_x(vector, delta, x_axis):
     """
-    returns the expected value of the location x of a vector
+    calculates the expected value of the location x of a vector
 
     :type vector: nparray
     :param vector: vector the expected value will be calculated of
@@ -53,6 +59,9 @@ def exp_x(vector, delta, x_axis):
 
     :type x_axis: nparray
     :param x_axis: the points on the x axis where the vector is defined
+
+    :rtype: float
+    :returns: the expected value of the location
     """
     ss = 0
     for (index, element) in enumerate(vector):
@@ -61,7 +70,7 @@ def exp_x(vector, delta, x_axis):
 
 def exp_x_sqrd(vector, delta, x_axis):
     """
-    returns the expected value of the square of the location x of a vector
+    calculates the expected value of the square of the location x of a vector
 
     :type vector: nparray
     :param vector: vector the expected value will be calculated of
@@ -71,6 +80,9 @@ def exp_x_sqrd(vector, delta, x_axis):
 
     :type x_axis: nparray
     :param x_axis: the points on the x axis where the vector is defined
+
+    :rtype: float
+    :returns: the expected value of the squared location
     """
     ss = 0
     for (index, element) in enumerate(vector):
@@ -79,7 +91,7 @@ def exp_x_sqrd(vector, delta, x_axis):
 
 def uncertainty(vector, delta, x_axis):
     """
-    returns the uncertainty in position of a particle
+    calculates the uncertainty in position of a particle
 
     :type vector: nparray
     :param vector: vector the uncertainty will be calculated of
@@ -89,6 +101,9 @@ def uncertainty(vector, delta, x_axis):
 
     :type x_axis: nparray
     :param x_axis: the points on the x axis where the vector is defined
+
+    :rtype: float
+    :returns: the uncertainty in position
     """
     return (exp_x_sqrd(vector, delta, x_axis)-exp_x(vector, delta, x_axis)**2)**(1/2)
 
