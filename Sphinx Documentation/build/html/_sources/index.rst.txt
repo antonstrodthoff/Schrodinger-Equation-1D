@@ -9,7 +9,7 @@ Welcome to Schrödinger Equation Solver in 1D's documentation!
 Guide
 ^^^^^
 
-The program consists of 5 python scripts. To solve the Schroedinger Equation for a certain potential
+The program consists of 6 python scripts. To solve the Schroedinger Equation for a certain potential
 the file main.py has to be executed. The necessary information to specify the problem has to be stored
 stored in a file named schrodinger.inp as shown in the following example:
 
@@ -24,18 +24,22 @@ The program will solve the Schroedinger Equation for the specified problem and s
     - expvalues.dat: contains the expected values of the locations and the uncertainties of the particle
 
 When executing main.py you are given the choice to change the default settings. These include:
-    - The directory of the schrodinger.inp file (default: ".")
-    - The directory the results will be saved in and plotted from (default: ".")
+    - The name of the input file (default: "./schrodinger.inp")
+    - The directory the results will be saved in and plotted from (default: "./")
+
+However the default settings dont have to be changed (given that schrodinger.inp is in the default directory).
+
+Aside from the main.py script there is another executable script called plot.py which plots the calculated results from a certain input directory. It will generate 2 diagrams:
+    - The left one contains the interpolated potential, the eigenstates (shifted on the y-axis by the eigenvalues) and the expected values of the location of the particle.
+    - The right diagram contains the uncertainty in postition of the particle.
+
+When executing plot.py you are given the choice to change the default settings. These include:
+    - The directory of the .dat files you want to plot (default: "./")
     - A scaling factor to scale the wave function in the plot by (default: 1.0)
     - An option to change the axis range of the plot (for example: -10,10,-10,10)
 
-However the program should do a good job even without changing the default settings (given that
-schrodinger.inp is in the default directory).
-
-Besides saving the results in .dat files, the program plots the calculated results. It will generate 2 diagrams.
-The left one contains the interpolated potential, the eigenstates (shifted on the y-axis by the eigenvalues)
-and the expected values of the location of the particle. The right diagram contains the uncertainty in postition
-of the particle.
+The files test_potential*.py in the main directory are only for testing. The necessary reference data is
+loaded from the folders test_potentials/test_results*_reference/.
 
 Code
 ^^^^

@@ -112,7 +112,7 @@ def calculate_and_save_results(inputpath, outputpath):
     this function does three things:
         -interpolating the given points of the potential defined by the user
         -solving the schrodinger equation and calculating the eigenstates,
-            eigenvalues, expected values and uncertainties
+    eigenvalues, expected values and uncertainties
         -saving the results in .dat files
 
     :type inputpath: string
@@ -158,7 +158,11 @@ def calculate_and_save_results(inputpath, outputpath):
     uncertainties = np.array(uncertaintylist)
 
     #saving
-    rd.save_xyformat(outputpath + "/potential.dat", x_axis, y_pot_inter(x_axis))
-    rd.save_nxyformat(outputpath + "/wavefuncs.dat", x_axis, norm_eigenvecs.T)
-    rd.save_xyformat(outputpath + "/energies.dat", energies, ["" for _ in energies])
-    rd.save_xyformat(outputpath + "/expvalues.dat", expected_x, uncertainties)
+    if not outputpath.endswith("/"):
+        outputpath = outputpath + "/"
+    rd.save_xyformat(outputpath + "potential.dat", x_axis, y_pot_inter(x_axis))
+    rd.save_nxyformat(outputpath + "wavefuncs.dat", x_axis, norm_eigenvecs.T)
+    rd.save_xyformat(outputpath + "energies.dat", energies, ["" for _ in energies])
+    rd.save_xyformat(outputpath + "expvalues.dat", expected_x, uncertainties)
+
+    print("The results have been saved succesfully into the folder \"" + outputpath + "\".")
